@@ -1,4 +1,4 @@
-FROM rocker/tidyverse
+FROM rocker/r-base
 MAINTAINER hmorzaria@hotmail.com
 # Install minimum requirements
 RUN apt-get update -qq && apt-get -y --no-install-recommends install \
@@ -7,7 +7,8 @@ RUN apt-get update -qq && apt-get -y --no-install-recommends install \
     libgdal-dev \
     libudunits2-dev \
     libxml2-dev \
-    libproj-dev    
+    libproj-dev \
+    libssl-dev
     
 #Install AzCopy, ver. 7.2 includes .NET Core dependencies; they do not need to install them a pre-requisite
 #https://docs.microsoft.com/en-us/azure/storage/common/storage-use-azcopy-linux
@@ -22,14 +23,11 @@ RUN \
     #setup R configs
 RUN echo "r <- getOption('repos'); r['CRAN'] <- 'http://cran.us.r-project.org'; options(repos = r);" > ~/.Rprofile
 RUN Rscript -e "install.packages('digest')"
-RUN Rscript -e "install.packages('tidyverse')"
-RUN Rscript -e "install.packages('data.table')"
-RUN Rscript -e "install.packages('rgdal')"
-RUN Rscript -e "install.packages('magrittr')"
-RUN Rscript -e "install.packages('raster')"
-RUN Rscript -e "install.packages('sp')"
+RUN Rscript -e "install.packages('tidyverse', dependencies = TRUE)"
+RUN Rscript -e "install.packages('data.table', dependencies = TRUE)"
 RUN Rscript -e "install.packages('fields')"
-RUN Rscript -e "install.packages('ncdf4')"
+RUN Rscript -e "install.packages('devtools')"
+RUN Rscript -e "install.packages('readxl')"
 RUN Rscript -e "install.packages('RNetCDF')"
 
 ENV TZ America/Los_Angeles
