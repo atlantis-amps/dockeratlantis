@@ -1,4 +1,4 @@
-FROM rocker/r-base
+FROM rocker/r-base:latest
 MAINTAINER hmorzaria@hotmail.com
 # Install minimum requirements
 RUN apt-get update -qq && apt-get -y --no-install-recommends install \
