@@ -1,6 +1,7 @@
-FROM rocker/r-base:latest
+FROM rocker/tidyverse:latest
 MAINTAINER hmorzaria@hotmail.com
 # Install minimum requirements
+RUN timedatectl set-timezone America/Los_Angeles
 RUN apt-get update -qq && apt-get -y --no-install-recommends install \
     libhdf5-dev \
     libnetcdf-dev \
@@ -8,8 +9,50 @@ RUN apt-get update -qq && apt-get -y --no-install-recommends install \
     libudunits2-dev \
     libxml2-dev \
     libproj-dev \
-    libssl-dev
+    libproj12 \
+    libssl-dev \
+    libv8-dev \
+    libgeos-dev \
+    libgeo-proj4-perl \
+    libgeos++-dev \
+    subversion \
+    flip \
+    autoconf \
+    lsscsi \
+    curl \
+    gdebi-core \
+    openssl \
+    proj-bin \
+    proj-data \
+    rpm \
+    ntp \
+    ntpdate \
+    gdal-bin \
+    python2.7 \
+    python-pip \
+    python-dev \
+    libpoppler-cpp-dev \
+    htop \
+    libprotobuf-dev \
+    protobuf-compiler \
+    librsvg2-dev \
+    libx11-dev \
+    mesa-common-dev \
+    libglu1-mesa-dev \
+    texlive-latex-extra \
+    libcairo2 \
+    libcairo2-dev \
+    netcdf-bin \
+    libapparmor1 
     
+RUN apt-get -y --no-install-recommends install \
+    gdal-bin \
+    python-gdal \
+    python3-gdal
+    
+RUN apt-get update -qq && apt-get -y --no-install-recommends install \
+    libjq-dev
+     
 #Install AzCopy, ver. 7.2 includes .NET Core dependencies; they do not need to install them a pre-requisite
 #https://docs.microsoft.com/en-us/azure/storage/common/storage-use-azcopy-linux
 RUN \
@@ -21,14 +64,23 @@ RUN \
     rm -Rf azcopy* install.sh
     
     #setup R configs
-RUN echo "r <- getOption('repos'); r['CRAN'] <- 'http://cran.us.r-project.org'; options(repos = r);" > ~/.Rprofile
 RUN Rscript -e "install.packages('digest')"
-RUN Rscript -e "install.packages('tidyverse', dependencies = TRUE)"
 RUN Rscript -e "install.packages('data.table', dependencies = TRUE)"
 RUN Rscript -e "install.packages('fields')"
 RUN Rscript -e "install.packages('devtools')"
 RUN Rscript -e "install.packages('readxl')"
 RUN Rscript -e "install.packages('RNetCDF')"
+RUN Rscript -e "install.packages('rgdal', dependencies = TRUE)"
+RUN Rscript -e "install.packages('httr', dependencies = TRUE)"
+RUN Rscript -e "install.packages('parallel')"
+RUN Rscript -e "install.packages('futures')"
+RUN Rscript -e "install.packages('doSNOW')"
+RUN Rscript -e "install.packages('raster', dependencies = TRUE)"
+RUN Rscript -e "install.packages('httr', dependencies = TRUE)"
+RUN Rscript -e "devtools::install_github('jporobicg/shinyrAtlantis')"
+RUN Rscript -e "devtools::install_github('Atlantis-Ecosystem-Model/ReactiveAtlantis')"
+RUN Rscript -e "devtools::install_github('Azure/rAzureBatch')"
+RUN Rscript -e "devtools::install_github('Azure/doAzureParallel')"
 
 ENV TZ America/Los_Angeles
 RUN ln -snf /usr/share/timezone/$TZ /etc/localtime && echo $TZ > /etc/timezone
