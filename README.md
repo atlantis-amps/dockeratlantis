@@ -7,6 +7,16 @@
 
     sudo chmod +x docker.sh
     sudo ./docker.sh
+    
+#### After the script completes run this command then close SSH session and reconnect
+    
+    sudo usermod -a -G docker $USER
+
+#### Login into DockerHub https://hub.docker.com
+
+    docker login --username=<username>
+
+#### Pull image from DockerHub
 
     docker pull hmorzaria/atlantisdockerfile:latest
 
