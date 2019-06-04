@@ -1,2 +1,2 @@
 # dockeratlantis
-Docker file for the Atlantis ecosystem model
+Ancilliary files to prepare VMs to run atlantisdockerfile
