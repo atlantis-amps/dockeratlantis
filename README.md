@@ -1,10 +1,21 @@
 # dockeratlantis
 ### Ancilliary files to prepare VMs to run atlantisdockerfile
 
-#### Copy docker.sh into VM using 
+## If not present install Atlantis in the local machine. Replace username and password
+
+svn co https://svnserv.csiro.au/svn/ext/atlantis/Atlantis/trunk --username <username> --password <password> --quiet
+
+### Run installatlantis.sh, this file is in this repository, copy content and save with nano
+
+    sudo nano installatlantis.sh
+    sudo chmod +x installatlantis.sh
+    sudo ./installatlantis.sh
+	
+    sudo cp -u trunk/atlantis/atlantismain/atlantisMerged /yourfolder
+
+#### Run docker.sh this file is in this repository, copy content and save with nano
 
     sudo nano docker.sh
-
     sudo chmod +x docker.sh
     sudo ./docker.sh
     
@@ -31,10 +42,6 @@
 
     docker ps
     
-#### Install Atlantis
-    sudo chmod +x installatlantis.sh
-    sudo ./installatlantis.sh
-
 #### Run container at bash. Replace <containerID> from docker ps command
 
     docker exec -it <containerID> bash 
