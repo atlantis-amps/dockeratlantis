@@ -30,8 +30,14 @@
 #### List containers
 
     docker ps
+    
+#### Install Atlantis
+    sudo chmod +x installatlantis.sh
+    sudo ./installatlantis.sh
 
 #### Run container at bash. Replace <containerID> from docker ps command
 
     docker exec -it <containerID> bash 
+    
+
 
