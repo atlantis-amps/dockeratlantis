@@ -26,10 +26,6 @@ sudo apt install -y docker-ce
 
 sudo systemctl status docker
 
-sudo usermod -a -G docker $USER
-
-echo "After the script completes close SSH session and reconnect"
-
 if [ -d $HOME/bin ]; then
 PATH=$PATH:$HOME/bin
 fi
