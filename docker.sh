@@ -22,7 +22,7 @@ apt-cache policy docker-ce
 
 echo "install Docker"
 
-sudo apt install -y docker-ce
+sudo apt install -y docker-ce subversion automake build-essential autoconf libnetcdf-dev libxml2-dev libproj-dev subversion valgrind
 
 sudo systemctl status docker
 
