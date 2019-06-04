@@ -1,7 +1,7 @@
 # dockeratlantis
 ### Ancilliary files to prepare VMs to run atlantisdockerfile
 
-### Copy docker.sh into VM using 
+# Copy docker.sh into VM using 
 
     sudo nano docker.sh
 
@@ -10,18 +10,18 @@
 
     docker pull hmorzaria/atlantisdockerfile:latest
 
-### list images
+# List images
     docker images
 
-### replace <username> and <password>, use all small caps
+# Replace <username> and <password>, use all small caps
   
     sudo docker run -d --name atlantisstudio -v $HOME:/home/atlantis -e USER=<username> -e PASSWORD=<password> -p 8787:8787 hmorzaria/atlantisdockerfile:latest
 
-### see containers
+# List containers
 
     docker ps
 
-### to go into the container at bash replace container id from docker ps command
+# Run container at bash. Replace <containerID> from docker ps command
 
     docker exec -it <containerID> bash 
 
